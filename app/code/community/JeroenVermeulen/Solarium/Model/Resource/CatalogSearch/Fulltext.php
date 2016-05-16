@@ -89,17 +89,21 @@ class JeroenVermeulen_Solarium_Model_Resource_CatalogSearch_Fulltext extends Mag
                         $query->setIsProcessed( 1 );
                     }
                 } else {
-                    $columns    = array( 'query_id', 'product_id', 'relevance' );
-                    $insertRows = array();
-                    $queryId    = $query->getId();
-                    foreach ($resultProducts as $data) {
-                        $insertRows[ ] = array( $queryId, $data[ 'product_id' ], $data[ 'relevance' ] );
-                    }
-                    $adapter->beginTransaction();
-                    $adapter->delete( $searchResultTable, 'query_id = ' . $queryId );
-                    $adapter->insertArray( $searchResultTable, $columns, $insertRows );
-                    $adapter->commit();
-                    $query->setIsProcessed( 1 );
+		    try{
+                    	$columns    = array( 'query_id', 'product_id', 'relevance' );
+	                $insertRows = array();
+        	        $queryId    = $query->getId();
+                    	foreach ($resultProducts as $data) {
+                            $insertRows[ ] = array( $queryId, $data[ 'product_id' ], $data[ 'relevance' ] );
+                    	}
+                    	$adapter->beginTransaction();
+                    	$adapter->delete( $searchResultTable, 'query_id = ' . $queryId );
+                    	$adapter->insertArray( $searchResultTable, $columns, $insertRows );
+                    	$adapter->commit();
+                    	$query->setIsProcessed( 1 );
+		    } catch ( Exception $e ){
+			$query->setIsProcessed(0);
+		    }
                 }
                 // Autocorrect notification
                 if ( $searchResult->didAutoCorrect() ) {
