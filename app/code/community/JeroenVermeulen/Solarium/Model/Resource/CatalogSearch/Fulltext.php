@@ -102,6 +102,7 @@ class JeroenVermeulen_Solarium_Model_Resource_CatalogSearch_Fulltext extends Mag
                     	$adapter->commit();
                     	$query->setIsProcessed( 1 );
 		    } catch ( Exception $e ){
+			$adapter->rollback();
 			$query->setIsProcessed(0);
 		    }
                 }
