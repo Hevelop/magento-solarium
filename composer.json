@@ -1,5 +1,5 @@
 {
-    "name": "jeroenvermeulen/solarium",
+    "name": "hevelop/solarium",
     "type": "magento-module",
     "description": "Solr based full text search for Magento CE. Uses the Solarium library.",
     "homepage": "https://github.com/jeroenvermeulen/magento-solarium/",
@@ -11,6 +11,10 @@
         {
             "name": "Jeroen Vermeulen",
             "email": "info@jeroenvermeulen.eu"
+        },
+        {
+            "name": "Matteo Manfrin",
+            "email": "matteo@hevelop.com"
         }
     ],
     "extra": {
